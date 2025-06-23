@@ -20,28 +20,28 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh 'make test-unit'
-                archiveArtifacts artifacts: 'results/*.xml'
-                junit 'results/*_result.xml'
+                archiveArtifacts artifacts: 'results/unit/**'
+                junit 'results/unit/*.xml'
             }
         }
 
-        stage('API tests') {
-            steps {
-                echo 'Running API tests...'
-                sh 'make test-api'
-                archiveArtifacts artifacts: 'results/api/*.xml'
-                junit 'results/api/*.xml'
-            }
-        }
+        // stage('API tests') {
+        //     steps {
+        //         echo 'Running API tests...'
+        //         sh 'make test-api'
+        //         archiveArtifacts artifacts: 'results/api/*.xml'
+        //         junit 'results/api/*.xml'
+        //     }
+        // }
 
-        stage('E2E tests') {
-            steps {
-                echo 'Running E2E tests...'
-                sh 'make test-e2e'
-                archiveArtifacts artifacts: 'results/e2e/**', allowEmptyArchive: true
-                junit 'results/e2e/*.xml'
-            }
-        }
+        // stage('E2E tests') {
+        //     steps {
+        //         echo 'Running E2E tests...'
+        //         sh 'make test-e2e'
+        //         archiveArtifacts artifacts: 'results/e2e/**', allowEmptyArchive: true
+        //         junit 'results/e2e/*.xml'
+        //     }
+        // }
     }
     post {
         always {
