@@ -28,13 +28,19 @@ pipeline {
             }
         }
 
-        // stage('API tests') {
-        //     steps {
-        //         echo 'Running API tests...'
-        //         sh 'make test-api'
-        //         archiveArtifacts artifacts: 'results/api_result.xml'
-        //     }
-        // }
+        stage('API tests') {
+            steps {
+                echo 'Running API tests...'
+                sh 'make test-api'
+                // archiveArtifacts artifacts: 'results/api_result.xml'
+                sh '''
+                    mkdir -p results/e2e
+                    mv results/cypress results/e2e/ || true
+                    mv results/*.json results/e2e/ || true
+                '''
+                archiveArtifacts artifacts: 'results/e2e/**', allowEmptyArchive: true
+            }
+        }
 
         // stage('E2E tests') {
         //     steps {
