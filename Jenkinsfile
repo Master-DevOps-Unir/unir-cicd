@@ -17,7 +17,7 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh 'make test-unit'
-                archiveArtifacts artifacts: 'results/unit/**'
+                archiveArtifacts artifacts: 'results/**'
             }
         }
 
