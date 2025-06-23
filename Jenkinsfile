@@ -21,13 +21,13 @@ pipeline {
             }
         }
 
-        // stage('API tests') {
-        //     steps {
-        //         echo 'Running API tests...'
-        //         sh 'make test-api'
-        //         archiveArtifacts artifacts: 'results/api_result.xml'
-        //     }
-        // }
+        stage('API tests') {
+            steps {
+                echo 'Running API tests...'
+                sh 'make test-api'
+                archiveArtifacts artifacts: 'results/**'
+            }
+        }
 
         // stage('E2E tests') {
         //     steps {
