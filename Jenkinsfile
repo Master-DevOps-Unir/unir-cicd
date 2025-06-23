@@ -29,13 +29,13 @@ pipeline {
             }
         }
 
-        // stage('E2E tests') {
-        //     steps {
-        //         echo 'Running E2E tests...'
-        //         sh 'make test-e2e'
-        //         archiveArtifacts artifacts: 'results/**', allowEmptyArchive: true
-        //     }
-        // }
+        stage('E2E tests') {
+            steps {
+                echo 'Running E2E tests...'
+                sh 'make test-e2e'
+                archiveArtifacts artifacts: 'results/**', allowEmptyArchive: true
+            }
+        }
     }
     post {
         always {
