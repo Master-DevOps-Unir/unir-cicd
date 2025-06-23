@@ -10,7 +10,7 @@ server:
 test-unit:
 	mkdir -p results/unit
 	docker run --name unit-tests --env PYTHONPATH=/opt/calc -w /opt/calc calculator-app:latest pytest --cov --cov-report=xml:results/unit/coverage.xml --cov-report=html:results/unit/coverage --junit-xml=results/unit/unit_result.xml -m unit || true
-	docker cp unit-tests:/opt/calc/results/unit ./unit/
+	docker cp unit-tests:/opt/calc/results/unit ./results/unit/
 	docker rm unit-tests || true
 
 test-api:
