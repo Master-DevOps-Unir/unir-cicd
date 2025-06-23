@@ -20,7 +20,7 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh 'make test-unit'
-                archiveArtifacts artifacts: 'results/unit/**'
+                archiveArtifacts artifacts: 'results/unit/*.xml'
                 junit 'results/unit/*.xml'
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Running API tests...'
                 sh 'make test-api'
-                archiveArtifacts artifacts: 'results/api/**'
+                archiveArtifacts artifacts: 'results/api/*.xml'
                 junit 'results/api/*.xml'
             }
         }
