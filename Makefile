@@ -17,8 +17,8 @@ test-api:
 	mkdir -p results/api
 	docker network create calc-test-api || true
 	docker run -d --network calc-test-api --env PYTHONPATH=/opt/calc --name apiserver --env FLASK_APP=app/api.py -p 5000:5000 -w /opt/calc calculator-app:latest flask run --host=0.0.0.0
-	docker run --network calc-test-api --name api-tests --env PYTHONPATH=/opt/calc --env BASE_URL=http://apiserver:5000/ -w /opt/calc calculator-app:latest pytest --junit-xml=results/api_result.xml -m api  || true
-	docker cp api-tests:/opt/calc/results/* ./results/api
+	docker run --network calc-test-api --name api-tests --env PYTHONPATH=/opt/calc --env BASE_URL=http://apiserver:5000/ -w /opt/calc calculator-app:latest pytest --junit-xml=results/api/api_result.xml -m api  || true
+	docker cp api-tests:/opt/calc/results/api ./results/
 	docker stop apiserver || true
 	docker rm --force apiserver || true
 	docker stop api-tests || true
