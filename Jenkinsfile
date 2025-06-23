@@ -20,8 +20,8 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh 'make test-unit'
-                archiveArtifacts artifacts: 'results/unit/*.xml'
-                junit 'results/unit/*.xml'
+                archiveArtifacts artifacts: 'results/*.xml'
+                junit 'results/*_result.xml'
             }
         }
 
