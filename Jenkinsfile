@@ -3,7 +3,7 @@ pipeline {
         label 'agent-1'
     }
     stages {
-        
+
         stage('Source') {
             steps {
                 git 'https://github.com/Master-DevOps-Unir/unir-cicd.git'
@@ -20,7 +20,8 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh 'make test-unit'
-                archiveArtifacts artifacts: 'results/*.xml'
+                archiveArtifacts artifacts: 'results/unit/**'
+                junit 'results/unit/*.xml'
             }
         }
 
@@ -28,7 +29,8 @@ pipeline {
             steps {
                 echo 'Running API tests...'
                 sh 'make test-api'
-                archiveArtifacts artifacts: 'results/api_result.xml'
+                archiveArtifacts artifacts: 'results/api/**'
+                junit 'results/api/*.xml'
             }
         }
 
@@ -36,13 +38,14 @@ pipeline {
             steps {
                 echo 'Running E2E tests...'
                 sh 'make test-e2e'
-                archiveArtifacts artifacts: 'results/**', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'results/e2e/**', allowEmptyArchive: true
+                junit 'results/e2e/*.xml'
             }
         }
     }
     post {
         always {
-            junit 'results/*_result.xml'
+            // junit 'results/*_result.xml'
             cleanWs()
         }
     }
