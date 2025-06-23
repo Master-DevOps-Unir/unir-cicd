@@ -21,7 +21,7 @@ pipeline {
             steps {
                 sh 'make test-unit'
                 archiveArtifacts artifacts: 'results/unit/**'
-                //junit 'results/unit/*_result.xml'
+                junit 'results/*_result.xml'
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
     }
     post {
         always {
-            junit 'results/*_result.xml'
+            // junit 'results/*_result.xml'
             cleanWs()
         }
     }
