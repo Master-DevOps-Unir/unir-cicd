@@ -20,8 +20,8 @@ pipeline {
         stage('Unit tests') {
             steps {
                 sh 'make test-unit'
-                archiveArtifacts artifacts: 'results/unit/*.xml'
-                junit 'results/unit/*_result.xml'
+                archiveArtifacts artifacts: 'results/unit/**'
+                //junit 'results/unit/*_result.xml'
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
     }
     post {
         always {
-            // junit 'results/*_result.xml'
+            junit 'results/*_result.xml'
             cleanWs()
         }
     }
